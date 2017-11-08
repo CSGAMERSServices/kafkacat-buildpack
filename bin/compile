@@ -7,8 +7,10 @@ DL_URL="https://github.com/edenhill/${APP}/archive/${VERSION}.tar.gz"
 FILE_NAME="${APP_NAME}.tar.gz"
 
 if [ -n $2/${FILE_NAME} ]; then
+  pushd $2
   echo "------> Downloading kafkacat source - ${DL_URL} -> ${2}/${FILE_NAME}"
-  curl -o $2/${FILE_NAME} -L ${DL_URL}
+  curl -o ${FILE_NAME} -L ${DL_URL}
+  ls -al
   tar -zxvf ${FILE_NAME}
 
   echo "------> Installing dependencies"
@@ -16,13 +18,14 @@ if [ -n $2/${FILE_NAME} ]; then
 
   echo "------> Configuring kafkacat"
   pushd ${APP_NAME}
-  $2/configure --enable-static --enable-json
+  configure --enable-static --enable-json
   make
   popd
 
   echo "------> Cleaning up source"
   rm -rf ${APP_NAME}
   rm ${FILE_NAME}
+  popd
 else
   echo "------> kafkacat found in cache dir!"
 fi
