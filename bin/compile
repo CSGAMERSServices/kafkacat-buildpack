@@ -6,7 +6,7 @@ APP_NAME="${APP}.${VERSION}"
 DL_URL="https://github.com/edenhill/${APP_NAME}.tar.gz"
 FILE_NAME="${APP_NAME}.tar.gz"
 
-if [ -z $2/${FILE_NAME} ]; then
+if [ -n $2/${FILE_NAME} ]; then
   echo "------> Downloading kafkacat source"
   curl -o ${FILE_NAME} -L $2/${DL_URL}
   tar -zxvf ${FILE_NAME}
