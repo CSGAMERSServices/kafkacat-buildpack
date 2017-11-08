@@ -14,14 +14,9 @@ if [ -n $2/${FILE_NAME} ]; then
   echo "------> Downloading kafkacat source - ${DL_URL} -> ${2}/${FILE_NAME}"
   curl --silent -L ${DL_URL} | tar zx
 
-  echo "------> Installing dependencies"
-  apt update
-  apt install librdkafka-dev libyajl-dev
-
-  echo "------> Configuring kafkacat"
+  echo "------> Bootstrapping kafkacat"
   pushd ${VERSION}
-  configure --enable-static --enable-json
-  make
+  ./bootstrap.sh
   popd
 
   echo "------> Cleaning up source"
