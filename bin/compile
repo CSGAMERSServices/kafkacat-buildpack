@@ -9,6 +9,7 @@ FILE_NAME="${APP_NAME}.tar.gz"
 set -xe
 
 if [ -n $2/${FILE_NAME} ]; then
+  mkdir -p $2
   pushd $2
   echo "------> Downloading kafkacat source - ${DL_URL} -> ${2}/${FILE_NAME}"
   curl --silent -L ${DL_URL} | tar zx
