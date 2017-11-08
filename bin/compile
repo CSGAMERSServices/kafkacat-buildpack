@@ -17,11 +17,14 @@ if [ -n $2/${FILE_NAME} ]; then
   echo "------> Bootstrapping kafkacat"
   pushd ${APP_NAME}
   ./bootstrap.sh
+  cp kafka ..
   popd
 
   echo "------> Cleaning up source"
+  ls -ah
   rm -rf ${APP_NAME}
   rm ${FILE_NAME}
+
   popd
 else
   echo "------> kafkacat found in cache dir!"
@@ -34,8 +37,6 @@ cp $2/kafka $1/bin
 echo ""
 echo "------> Success! kafkacat installed."
 echo ""
-
-$1/bin/kafka -h
 
 echo ""
 echo "------> Installing Kafka certs"
