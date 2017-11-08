@@ -39,7 +39,7 @@ echo ""
 echo ""
 echo "------> Installing Kafka certs"
 ls -ah $3
-if [ -z $3/KAFKA_URL ] && [ -z $3/KAFKA_CLIENT_CERT ] && [ -z $3/KAFKA_CLIENT_CERT_KEY ] && [ -z $3/KAFKA_TRUSTED_CERT ]; then
+if [ -f $3/KAFKA_URL ] && [ -f $3/KAFKA_CLIENT_CERT ] && [ -f $3/KAFKA_CLIENT_CERT_KEY ] && [ -f $3/KAFKA_TRUSTED_CERT ]; then
   pushd $1
   mkdir -p ssl
   pushd ssl
