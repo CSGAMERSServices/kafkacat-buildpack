@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+APP=kafkacat
+VERSION=1.3.1
+APP_NAME="${APP}.${VERSION}"
+DL_URL="https://github.com/edenhill/${APP_NAME}.tar.gz"
+FILE_NAME="${APP_NAME}.tar.gz"
+
+if [ -z $2/${FILE_NAME} ]; then
+  echo "------> Downloading kafkacat source"
+  curl -o ${FILE_NAME} -L $2/${DL_URL}
+  tar -zxvf ${FILE_NAME}
+
+  echo "------> Installing dependencies"
+  sudo apt-get install librdkafka-dev libyajl-dev
+
+  echo "------> Configuring kafkacat"
+  pushd ${APP_NAME}
+  $2/configure --enable-static --enable-json
+  make
+  popd
+
+  echo "------> Cleaning up source"
+  rm -rf ${APP_NAME}
+  rm ${FILE_NAME}
+else
+  echo "------> kafkacat found in cache dir!"
+fi
+
+echo "------> Copying to BUILD_DIR"
+mkdir -p $1/bin
+cp $2/kafka $1/bin
+
+echo ""
+echo "------> Success! kafkacat installed."
+echo ""
+
+$1/bin/kafka -h
