@@ -8,7 +8,7 @@ FILE_NAME="${APP_NAME}.tar.gz"
 
 set -xe
 
-if [ -n $2/${FILE_NAME} ]; then
+if [ -n $2/${APP} ]; then
   mkdir -p $2
   pushd $2
   echo "------> Downloading kafkacat source - ${DL_URL}"
@@ -38,14 +38,13 @@ echo ""
 
 echo ""
 echo "------> Installing Kafka certs"
-ls -ah $3
 if [ -f $3/KAFKA_URL ] && [ -f $3/KAFKA_CLIENT_CERT ] && [ -f $3/KAFKA_CLIENT_CERT_KEY ] && [ -f $3/KAFKA_TRUSTED_CERT ]; then
   pushd $1
   mkdir -p ssl
   pushd ssl
-  cp $3/KAFKA_CLIENT_CERT ssl/client.pem
-  cp $3/KAFKA_CLIENT_CERT_KEY ssl/client.key
-  cp $3/KAFKA_TRUSTED_CERT ssl/server.pem
+  cp $3/KAFKA_CLIENT_CERT client.pem
+  cp $3/KAFKA_CLIENT_CERT_KEY client.key
+  cp $3/KAFKA_TRUSTED_CERT server.pem
   popd
   popd
 fi
