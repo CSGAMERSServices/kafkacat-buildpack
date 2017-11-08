@@ -40,3 +40,16 @@ echo "------> Success! kafkacat installed."
 echo ""
 
 $1/bin/kafka -h
+
+echo ""
+echo "------> Installing Kafka certs"
+if [ -z $3/KAFKA_URL ] && [ -z $3/KAFKA_CLIENT_CERT ] && [ -z $3/KAFKA_CLIENT_CERT_KEY ] && [ -z $3/KAFKA_TRUSTED_CERT ]; then
+  mkdir -p ssl
+  pushd ssl
+  cp $3/KAFKA_CLIENT_CERT ssl/client.pem
+  cp $3/KAFKA_CLIENT_CERT_KEY ssl/client.key
+  cp $3/KAFKA_TRUSTED_CERT ssl/server.pem
+  popd
+fi
+
+echo ""
