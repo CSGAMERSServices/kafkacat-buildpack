@@ -6,7 +6,7 @@ APP_NAME="${APP}-${VERSION}"
 DL_URL="https://github.com/edenhill/${APP}/archive/${VERSION}.tar.gz"
 FILE_NAME="${APP_NAME}.tar.gz"
 
-set -xe
+set -e
 
 if [ -n $2/${APP} ]; then
   mkdir -p $2
@@ -48,5 +48,3 @@ if [ -f $3/KAFKA_URL ] && [ -f $3/KAFKA_CLIENT_CERT ] && [ -f $3/KAFKA_CLIENT_CE
   popd
   popd
 fi
-
-echo ""
