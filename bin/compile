@@ -23,7 +23,6 @@ if [ -n $2/${FILE_NAME} ]; then
   echo "------> Cleaning up source"
   ls -ah
   rm -rf ${APP_NAME}
-  rm ${FILE_NAME}
 
   popd
 else
