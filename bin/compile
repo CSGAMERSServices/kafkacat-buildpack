@@ -32,6 +32,8 @@ echo "------> Copying to BUILD_DIR"
 mkdir -p $1/bin
 cp $2/kafkacat $1/bin
 
+PATH=$PATH:/app/bin
+
 ls -a $2
 
 echo ""
