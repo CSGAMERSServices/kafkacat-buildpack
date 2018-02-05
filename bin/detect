@@ -1,3 +1,7 @@
-#!/usr/bin/env bash
-
-exit 0
+if [ -f $1/kafka.json ]; then
+  echo "Kafka Support Framework detected"
+  exit 0
+else
+  echo "Detection of Kafka Support Framework failed. Make sure kafka.json is present in the root directory of the project"
+  exit 1
+fi
